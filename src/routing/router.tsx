@@ -1,7 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import {RootLayout} from "../layouts";
 import {MoviesPage} from "../pages";
-import {movieService} from "../services";
 
 const router = createBrowserRouter([
     {

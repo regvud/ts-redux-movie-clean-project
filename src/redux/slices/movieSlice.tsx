@@ -4,11 +4,11 @@ import {movieService} from "../../services";
 import {AxiosError} from "axios";
 
 interface IState {
-    movies: IMovieResponse
+    movieData: IMovieResponse
 }
 
 const initialState: IState = {
-    movies: null
+    movieData: null
 }
 
 const getAllMovies = createAsyncThunk<IMovieResponse, void>(
@@ -30,7 +30,7 @@ const movieSlice = createSlice({
         reducers: {},
         extraReducers: builder => builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
-                state.movies = action.payload
+                state.movieData = action.payload
             })
     }
 )
@@ -38,7 +38,8 @@ const movieSlice = createSlice({
 const {reducer: movieReducer, actions} = movieSlice;
 
 const movieActions = {
-    ...actions
+    ...actions,
+    getAllMovies
 }
 
 export {
