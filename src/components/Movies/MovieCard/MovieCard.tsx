@@ -13,6 +13,7 @@ const MovieCard: FC<IProps> = ({movie}) => {
             <h2>{id}</h2>
             <h2>{title}</h2>
             <h2>{poster_path}</h2>
+            <img src={poster_path} alt="img"/>
         </div>
     );
 };
