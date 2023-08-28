@@ -4,7 +4,12 @@ import {RootLayout} from "../layouts";
 const router = createBrowserRouter([
     {
         path: '',
-        element: <RootLayout/>
+        element: <RootLayout/>,
+        children:[
+            {
+                
+            }
+        ]
     }
 ])
 
