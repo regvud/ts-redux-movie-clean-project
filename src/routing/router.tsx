@@ -11,7 +11,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <MoviesPage/>,
-                loader: movieService.getAllMovies
+                // loader: movieService.getAllMovies
             }
         ]
     }
