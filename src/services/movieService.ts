@@ -1,8 +1,9 @@
 import {apiService} from "./apiService";
-import {urls} from "../constants";
+import {movieToken, urls} from "../constants";
 
+const options = {headers: {'Authorization': `Bearer ${movieToken}`}};
 const movieService = {
-    getAllMovies: () => apiService.get(urls.movies.base)
+    getAllMovies: () => apiService.get(urls.movies.base, options)
 }
 
 export {
