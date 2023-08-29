@@ -1,0 +1,5 @@
+const posterService = {}
+
+export {
+    posterService
+}
