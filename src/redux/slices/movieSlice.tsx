@@ -2,23 +2,27 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {IMovieResponse} from "../../interfaces";
 import {movieService} from "../../services";
 import {AxiosError} from "axios";
-import {posterService} from "../../services/posterService";
+import {RootState} from "../store";
 
 interface IState {
     movieData: IMovieResponse,
-    moviePosters: string[]
+    // moviePoster: object
+    page: number
 }
 
 const initialState: IState = {
     movieData: null,
-    moviePosters: []
+    // moviePoster: null
+    page: 1
 }
 
 const getAllMovies = createAsyncThunk<IMovieResponse, void>(
     'movieSlice/getAllMovies',
-    async (_, {rejectWithValue}) => {
+    async (_, {rejectWithValue, getState}) => {
         try {
-            const {data} = await movieService.getAllMovies()
+            const {movies: {page}} = getState() as RootState;
+            const {data} = await movieService.getAllMovies(page)
+            console.log(data)
             return data
         } catch (e) {
             const err = e as AxiosError
@@ -27,11 +31,12 @@ const getAllMovies = createAsyncThunk<IMovieResponse, void>(
     }
 )
 
-// const setPoster = createAsyncThunk<any, string>(
+// const setPoster = createAsyncThunk<object, string>(
 //     'movieSlice/setPoster',
 //     async (path, {rejectWithValue}) => {
 //         try {
-//             return await posterService.getPosterByPath(path)
+//             const {data} = await posterService.getPosterByPath(path)
+//             return data
 //         } catch (e) {
 //             const err = e as AxiosError
 //             rejectWithValue(err.response.data)
@@ -47,9 +52,9 @@ const movieSlice = createSlice({
             .addCase(getAllMovies.fulfilled, (state, action) => {
                 state.movieData = action.payload
             })
-    //         .addCase(setPoster.fulfilled, (state, action) => {
-    //             state.moviePosters = action.payload
-    //         })
+        // .addCase(setPoster.fulfilled, (state, action) => {
+        //     state.moviePoster = action.payload
+        // })
     }
 )
 

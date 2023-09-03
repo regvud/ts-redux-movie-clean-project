@@ -1,8 +1,7 @@
 const baseURL = 'https://api.themoviedb.org/3/'
-const postersBaseURL = 'https://image.tmdb.org/t/p/'
 
 const movies = 'discover/movie'
-const posters = 'original'
+const posters = 'https://image.tmdb.org/t/p/w500'
 
 const urls = {
     movies: {
@@ -11,7 +10,7 @@ const urls = {
     },
     posters: {
         base: posters,
-        byPath: (path: string): string => `${posters}/${path}`
+        byPath: (path: string): string => `https://image.tmdb.org/t/p/w500${path}`
     }
 
 }
@@ -19,5 +18,4 @@ const urls = {
 export {
     urls,
     baseURL,
-    postersBaseURL
 }
