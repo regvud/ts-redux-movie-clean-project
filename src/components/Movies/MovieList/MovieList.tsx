@@ -4,7 +4,8 @@ import {MovieCard} from "../MovieCard/MovieCard";
 import {IShortMovie} from "../../../interfaces";
 
 const MovieList = () => {
-    const {movieData} = useAppSelector(state => state.movies);
+    const {movieData, page} = useAppSelector(state => state.movies);
+    console.log(page)
     return (
         <div>
             {movieData?.results.map((movie: IShortMovie, id: number) => <MovieCard movie={movie} key={id}/>)}

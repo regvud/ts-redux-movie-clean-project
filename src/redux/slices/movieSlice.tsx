@@ -1,26 +1,26 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IMovieResponse} from "../../interfaces";
 import {movieService} from "../../services";
 import {AxiosError} from "axios";
-import {RootState} from "../store";
 
 interface IState {
     movieData: IMovieResponse,
     // moviePoster: object
     page: number
+    total_pages: number
 }
 
 const initialState: IState = {
     movieData: null,
     // moviePoster: null
-    page: 1
+    page: 1,
+    total_pages: null
 }
 
-const getAllMovies = createAsyncThunk<IMovieResponse, void>(
+const getAllMovies = createAsyncThunk<IMovieResponse, number>(
     'movieSlice/getAllMovies',
-    async (_, {rejectWithValue, getState}) => {
+    async (page, {rejectWithValue}) => {
         try {
-            const {movies: {page}} = getState() as RootState;
             const {data} = await movieService.getAllMovies(page)
             console.log(data)
             return data
@@ -47,10 +47,18 @@ const getAllMovies = createAsyncThunk<IMovieResponse, void>(
 const movieSlice = createSlice({
         name: 'movieSlice',
         initialState,
-        reducers: {},
+        reducers: {
+            incrementPage: (state) => {
+                state.page++
+            },
+            decrementPage: (state) => {
+                state.page--
+            }
+        },
         extraReducers: builder => builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
                 state.movieData = action.payload
+                state.total_pages = action.payload.total_pages
             })
         // .addCase(setPoster.fulfilled, (state, action) => {
         //     state.moviePoster = action.payload

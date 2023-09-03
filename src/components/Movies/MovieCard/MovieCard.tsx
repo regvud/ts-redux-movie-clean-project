@@ -1,8 +1,5 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import {IShortMovie} from "../../../interfaces";
-import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
-import {movieActions} from "../../../redux/slices/movieSlice";
-import {movieService, posterService} from "../../../services";
 import {urls} from "../../../constants";
 
 interface IProps {
