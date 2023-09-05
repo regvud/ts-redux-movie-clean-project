@@ -8,7 +8,8 @@ import {movieToken, urls} from "../constants";
 
 const MoviesPage = () => {
     const dispatch = useAppDispatch();
-    const {page, total_pages} = useAppSelector(state => state.movies);
+    const {total_pages} = useAppSelector(state => state.movies);
+    const [page, setPage] = useState(2)
     const [params, setParams] = useSearchParams({page: '1'});
     const location = useLocation();
     const navigate = useNavigate();
@@ -23,13 +24,12 @@ const MoviesPage = () => {
         params.delete('page')
     }
 
-    console.log(params.get('page'))
+    console.log(`paramsPage:${thisPage}`)
+    console.log(`redux page: ${page}`)
     const handlePage = () => {
-        dispatch(movieActions.incrementPage())
-        if (page) {
-            setParams({page: page.toString()})
-
-        }
+        setPage(prevState => ++prevState)
+        console.log(page)
+        setParams({page: page.toString()})
     }
 
     return (
