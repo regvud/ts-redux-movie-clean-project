@@ -5,8 +5,9 @@ import {IShortMovie} from "../../../interfaces";
 
 const MovieList = () => {
     const {movieData} = useAppSelector(state => state.movies);
+
     return (
-        <div>
+        <div style={{background: 'aliceblue'}}>
             {movieData?.results.map((movie: IShortMovie, id: number) => <MovieCard movie={movie} key={id}/>)}
         </div>
     );

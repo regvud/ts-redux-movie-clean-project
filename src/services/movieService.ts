@@ -11,7 +11,7 @@ const movieService = {
                 params: {page}
             }
         );
-    },
+    }
 }
 
 export {

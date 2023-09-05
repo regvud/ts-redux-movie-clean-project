@@ -16,13 +16,11 @@ const initialState: IState = {
     page: 1,
     total_pages: null
 }
-
 const getAllMovies = createAsyncThunk<IMovieResponse, number>(
     'movieSlice/getAllMovies',
     async (page, {rejectWithValue}) => {
         try {
             const {data} = await movieService.getAllMovies(page)
-            console.log(data)
             return data
         } catch (e) {
             const err = e as AxiosError
@@ -30,6 +28,7 @@ const getAllMovies = createAsyncThunk<IMovieResponse, number>(
         }
     }
 )
+
 
 // const setPoster = createAsyncThunk<object, string>(
 //     'movieSlice/setPoster',
