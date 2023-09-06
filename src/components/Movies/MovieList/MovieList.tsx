@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppSelector} from "../../../hooks/reduxHooks";
-import {MovieCard} from "../MovieCard/MovieCard";
 import {IShortMovie} from "../../../interfaces";
+import {MovieCard} from "../MovieCard/MovieCard";
 
 const MovieList = () => {
     const {movieData} = useAppSelector(state => state.movies);
