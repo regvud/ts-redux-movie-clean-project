@@ -1,11 +1,12 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {IMovieResponse} from "../../interfaces";
-import {movieService, posterService} from "../../services";
-import {AxiosError} from "axios";
+import {movieService} from "../../services";
+import axios, {AxiosError} from "axios";
+import {urls} from "../../constants";
 
 interface IState {
     movieData: IMovieResponse,
-    moviePoster: object
+    moviePoster: FormData
     total_pages: number
 }
 
@@ -14,6 +15,7 @@ const initialState: IState = {
     moviePoster: null,
     total_pages: null
 }
+
 const getAllMovies = createAsyncThunk<IMovieResponse, number>(
     'movieSlice/getAllMovies',
     async (page, {rejectWithValue}) => {
@@ -28,18 +30,18 @@ const getAllMovies = createAsyncThunk<IMovieResponse, number>(
 )
 
 
-// const getPoster = createAsyncThunk<object, string>(
-//     'movieSlice/setPoster',
-//     async (path, {rejectWithValue}) => {
-//         try {
-//             const {data} = await posterService.getPosterByPath(path)
-//             return data
-//         } catch (e) {
-//             const err = e as AxiosError
-//             rejectWithValue(err.response.data)
-//         }
-//     }
-// )
+const getPoster = createAsyncThunk<FormData, number>(
+    'movieSlice/setPoster',
+    async (id, {rejectWithValue}) => {
+        try {
+            const {data} = await axios.get(urls.posters.byID(id))
+            return data
+        } catch (e) {
+            const err = e as AxiosError
+            rejectWithValue(err.response.data)
+        }
+    }
+)
 
 const movieSlice = createSlice({
         name: 'movieSlice',
@@ -50,9 +52,9 @@ const movieSlice = createSlice({
                 state.movieData = action.payload
                 state.total_pages = action.payload.total_pages
             })
-        //     .addCase(getPoster.fulfilled, (state, action) => {
-        //         state.moviePoster = action.payload
-        //     })
+            .addCase(getPoster.fulfilled, (state, action) => {
+                state.moviePoster = action.payload
+            })
     }
 )
 
@@ -61,7 +63,7 @@ const {reducer: movieReducer, actions} = movieSlice;
 const movieActions = {
     ...actions,
     getAllMovies,
-    // getPoster
+    getPoster
 }
 
 export {

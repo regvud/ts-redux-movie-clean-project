@@ -13,11 +13,7 @@ const movieService = {
             }
         );
     },
-    getPosterByID: (id: number) => axios.get(urls.posters.byID(id), {
-        headers: {
-            'Authorization': `Bearer ${movieToken}`,
-        }
-    })
+
 
 }
 

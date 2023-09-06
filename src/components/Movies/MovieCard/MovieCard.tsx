@@ -1,6 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {IShortMovie} from "../../../interfaces";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
+import {movieActions} from "../../../redux/slices/movieSlice";
+import {urls} from "../../../constants";
 
 
 interface IProps {
@@ -22,10 +24,9 @@ const MovieCard: FC<IProps> = ({movie}) => {
         const dispatch = useAppDispatch();
         const {moviePoster} = useAppSelector(state => state.movies);
 
-        useEffect(() => {
-
-        }, []);
-
+        // useEffect(() => {
+        //     dispatch(movieActions.getPoster(id));
+        // }, []);
 
         return (
             <>
@@ -33,7 +34,7 @@ const MovieCard: FC<IProps> = ({movie}) => {
                 <h2>{id}</h2>
                 <h2>{title}</h2>
                 <h2>{poster_path}</h2>
-                {/*<img src={moviePoster} alt={title}/>*/}
+                {/*<img src={urls.posters.} alt={title}/>*/}
             </>
         );
     }
