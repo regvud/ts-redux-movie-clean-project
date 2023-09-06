@@ -28,18 +28,18 @@ const getAllMovies = createAsyncThunk<IMovieResponse, number>(
 )
 
 
-const getPoster = createAsyncThunk<object, string>(
-    'movieSlice/setPoster',
-    async (path, {rejectWithValue}) => {
-        try {
-            const {data} = await posterService.getPosterByPath(path)
-            return data
-        } catch (e) {
-            const err = e as AxiosError
-            rejectWithValue(err.response.data)
-        }
-    }
-)
+// const getPoster = createAsyncThunk<object, string>(
+//     'movieSlice/setPoster',
+//     async (path, {rejectWithValue}) => {
+//         try {
+//             const {data} = await posterService.getPosterByPath(path)
+//             return data
+//         } catch (e) {
+//             const err = e as AxiosError
+//             rejectWithValue(err.response.data)
+//         }
+//     }
+// )
 
 const movieSlice = createSlice({
         name: 'movieSlice',
@@ -50,9 +50,9 @@ const movieSlice = createSlice({
                 state.movieData = action.payload
                 state.total_pages = action.payload.total_pages
             })
-            .addCase(getPoster.fulfilled, (state, action) => {
-                state.moviePoster = action.payload
-            })
+        //     .addCase(getPoster.fulfilled, (state, action) => {
+        //         state.moviePoster = action.payload
+        //     })
     }
 )
 
@@ -61,7 +61,7 @@ const {reducer: movieReducer, actions} = movieSlice;
 const movieActions = {
     ...actions,
     getAllMovies,
-    getPoster
+    // getPoster
 }
 
 export {

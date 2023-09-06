@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {IShortMovie} from "../../../interfaces";
-import {movieActions} from "../../../redux/slices/movieSlice";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
+
 
 interface IProps {
     movie: IShortMovie
@@ -23,12 +23,10 @@ const MovieCard: FC<IProps> = ({movie}) => {
         const {moviePoster} = useAppSelector(state => state.movies);
 
         useEffect(() => {
-            dispatch(movieActions.getPoster(poster_path))
+
         }, []);
 
-        const data = new FormData()
-        data.append('poster', data)
-        console.log(moviePoster)
+
         return (
             <>
                 <hr/>
