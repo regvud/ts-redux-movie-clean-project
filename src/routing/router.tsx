@@ -1,8 +1,6 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
 import {RootLayout} from "../layouts";
 import {MoviesPage} from "../pages";
-import {movieActions} from "../redux/slices/movieSlice";
-import {movieService} from "../services";
 import {MovieExtended} from "../components/Movies";
 
 const router = createBrowserRouter([

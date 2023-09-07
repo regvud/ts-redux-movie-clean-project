@@ -44,7 +44,9 @@ const movieSlice = createSlice({
         name: 'movieSlice',
         initialState,
         reducers: {
-            resetFullMovie: (state) => state.fullMovie === null
+            resetFullMovie: (state) => {
+                state.fullMovie = null
+            }
         },
         extraReducers: builder => builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
