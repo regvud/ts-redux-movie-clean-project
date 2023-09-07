@@ -1,7 +1,6 @@
 import {apiService} from "./apiService";
 import {movieToken, urls} from "../constants";
 import {IMovieResponse} from "../interfaces";
-import axios from "axios/index";
 
 const movieService = {
     getAllMovies: (page: number) => {
