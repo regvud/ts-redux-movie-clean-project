@@ -1,17 +1,21 @@
 import {apiService} from "./apiService";
 import {movieToken, urls} from "../constants";
-import {IMovieResponse} from "../interfaces";
+import {IFullMovie, IMovieResponse} from "../interfaces";
+
 
 const movieService = {
-    getAllMovies: (page: number) => {
-        return apiService.get<IMovieResponse>(urls.movies.base, {
-                headers: {
-                    'Authorization': `Bearer ${movieToken}`,
-                },
-                params: {page}
-            }
-        );
-    },
+    getAllMovies: (page: number) => apiService.get<IMovieResponse>(urls.movies.base, {
+        headers: {
+            'Authorization': `Bearer ${movieToken}`,
+        },
+        params: {page}
+    }),
+    byID: (id: number) => apiService.get<IFullMovie>(urls.movies.byID(id), {
+        headers: {
+            'Authorization': `Bearer ${movieToken}`,
+        },
+
+    })
 
 
 }

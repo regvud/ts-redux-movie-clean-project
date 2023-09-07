@@ -1,19 +1,16 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IMovieResponse} from "../../interfaces";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IFullMovie, IMovieResponse} from "../../interfaces";
 import {movieService} from "../../services";
-import axios, {AxiosError} from "axios";
-import {urls} from "../../constants";
+import {AxiosError} from "axios";
 
 interface IState {
     movieData: IMovieResponse,
-    moviePoster: FormData
-    total_pages: number
+    fullMovie: IFullMovie
 }
 
 const initialState: IState = {
     movieData: null,
-    moviePoster: null,
-    total_pages: null
+    fullMovie: null
 }
 
 const getAllMovies = createAsyncThunk<IMovieResponse, number>(
@@ -29,12 +26,11 @@ const getAllMovies = createAsyncThunk<IMovieResponse, number>(
     }
 )
 
-
-const getPoster = createAsyncThunk<FormData, number>(
-    'movieSlice/setPoster',
+const getFullMovie = createAsyncThunk<IFullMovie, number>(
+    'movieSlice/getFullMovie',
     async (id, {rejectWithValue}) => {
         try {
-            const {data} = await axios.get(urls.posters.byID(id))
+            const {data} = await movieService.byID(id)
             return data
         } catch (e) {
             const err = e as AxiosError
@@ -43,17 +39,19 @@ const getPoster = createAsyncThunk<FormData, number>(
     }
 )
 
+
 const movieSlice = createSlice({
         name: 'movieSlice',
         initialState,
-        reducers: {},
+        reducers: {
+            resetFullMovie: (state) => state.fullMovie === null
+        },
         extraReducers: builder => builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
                 state.movieData = action.payload
-                state.total_pages = action.payload.total_pages
             })
-            .addCase(getPoster.fulfilled, (state, action) => {
-                state.moviePoster = action.payload
+            .addCase(getFullMovie.fulfilled, (state, action) => {
+                state.fullMovie = action.payload
             })
     }
 )
@@ -63,7 +61,7 @@ const {reducer: movieReducer, actions} = movieSlice;
 const movieActions = {
     ...actions,
     getAllMovies,
-    getPoster
+    getFullMovie
 }
 
 export {

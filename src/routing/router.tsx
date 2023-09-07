@@ -3,6 +3,7 @@ import {RootLayout} from "../layouts";
 import {MoviesPage} from "../pages";
 import {movieActions} from "../redux/slices/movieSlice";
 import {movieService} from "../services";
+import {MovieExtended} from "../components/Movies";
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
             {
                 path: 'movies',
                 element: <MoviesPage/>,
+            },
+            {
+                path: 'movies/:id',
+                element: <MovieExtended/>,
             }
         ]
     }

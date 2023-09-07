@@ -27,7 +27,6 @@ const MoviesPage = () => {
 
     }
 
-    console.log('render');
     return (
         <>
             <div>
