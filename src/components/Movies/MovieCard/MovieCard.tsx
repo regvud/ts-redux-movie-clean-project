@@ -18,7 +18,6 @@ const MovieCard: FC<IProps> = ({movie}) => {
 
         return (
             <>
-                <hr/>
                 <h2>{release_date}</h2>
                 <h2>{title}</h2>
                 <img src={`${posterURL}${poster_path}`} alt={title} onClick={() => transferToFullMovie(id)}/>
