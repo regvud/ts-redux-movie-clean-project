@@ -5,12 +5,14 @@ import {AxiosError} from "axios";
 
 interface IState {
     movieData: IMovieResponse,
-    fullMovie: IFullMovie
+    fullMovie: IFullMovie,
+    status: string
 }
 
 const initialState: IState = {
     movieData: null,
-    fullMovie: null
+    fullMovie: null,
+    status: null
 }
 
 const getAllMovies = createAsyncThunk<IMovieResponse, number>(
@@ -51,6 +53,9 @@ const movieSlice = createSlice({
         extraReducers: builder => builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
                 state.movieData = action.payload
+            })
+            .addCase(getAllMovies.pending, (state) => {
+                state.status = 'pending'
             })
             .addCase(getFullMovie.fulfilled, (state, action) => {
                 state.fullMovie = action.payload

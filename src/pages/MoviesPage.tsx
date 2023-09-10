@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
+import {Outlet, useSearchParams} from "react-router-dom";
+
 import {useAppDispatch} from "../hooks/reduxHooks";
 import {movieActions} from "../redux/slices/movieSlice";
-import {useSearchParams} from "react-router-dom";
-import {MovieList} from "../components/Movies";
 
 const MoviesPage = () => {
     const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const MoviesPage = () => {
                     onClick={() => handlePage('+')}>next
                 </button>
             </div>
-            <MovieList/>
+            <Outlet/>
         </>
     );
 };

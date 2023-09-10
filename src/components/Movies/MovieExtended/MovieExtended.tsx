@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
+
 import {movieActions} from "../../../redux/slices/movieSlice";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {posterURL} from "../../../constants";

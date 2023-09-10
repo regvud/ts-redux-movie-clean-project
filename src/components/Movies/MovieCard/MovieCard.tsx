@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+
 import {IShortMovie} from "../../../interfaces";
 import {posterURL} from "../../../constants";
 import {useNavigate} from "react-router-dom";
@@ -16,11 +17,11 @@ const MovieCard: FC<IProps> = ({movie}) => {
         }
 
         return (
-            <>
-                <h2>{release_date}</h2>
+            <div>
                 <h2>{title}</h2>
+                <h2>{release_date}</h2>
                 <img src={`${posterURL}${poster_path}`} alt={title} onClick={() => transferToFullMovie(id)}/>
-            </>
+            </div>
         );
     }
 ;

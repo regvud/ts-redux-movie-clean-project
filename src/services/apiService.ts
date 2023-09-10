@@ -4,11 +4,12 @@ import axios from "axios";
 const apiService = axios.create({baseURL})
 
 apiService.interceptors.request.use(
-    value => {
-        value.headers
-
+    req => {
+        req.headers.Authorization = `Bearer ${movieToken}`
+        return req
     }
 )
+
 export {
     apiService
 }

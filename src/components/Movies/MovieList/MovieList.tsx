@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {useAppSelector} from "../../../hooks/reduxHooks";
 import {IShortMovie} from "../../../interfaces";
 import {MovieCard} from "../MovieCard/MovieCard";
