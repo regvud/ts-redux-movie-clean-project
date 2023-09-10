@@ -8,10 +8,10 @@ import {posterURL} from "../../../constants";
 const MovieExtended = () => {
     const {fullMovie} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
-    // const {id} = useParams();
+    const {id} = useParams();
 
     useEffect(() => {
-        // dispatch(movieActions.getFullMovie(+id))
+        dispatch(movieActions.getFullMovie(+id))
         dispatch(movieActions.resetFullMovie())
     }, []);
 

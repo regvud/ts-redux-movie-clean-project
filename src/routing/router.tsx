@@ -30,9 +30,6 @@ const router = createBrowserRouter([
             {
                 path: 'movies/:id',
                 element: <MovieExtended/>,
-                loader: async ({params}) => {
-                    return store.dispatch(movieActions.getFullMovie(+params))
-                }
             },
             {
                 path: 'genres',

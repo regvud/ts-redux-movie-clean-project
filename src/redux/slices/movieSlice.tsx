@@ -1,21 +1,21 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IFullMovie, IMovieResponse} from "../../interfaces";
+import {IFullMovie, IShortMovie} from "../../interfaces";
 import {movieService} from "../../services";
 import {AxiosError} from "axios";
 
 interface IState {
-    movieData: IMovieResponse,
+    movieData: IShortMovie[],
     fullMovie: IFullMovie,
     status: string
 }
 
 const initialState: IState = {
-    movieData: null,
+    movieData: [],
     fullMovie: null,
     status: null
 }
 
-const getAllMovies = createAsyncThunk<IMovieResponse, number>(
+const getAllMovies = createAsyncThunk<IShortMovie[], number>(
     'movieSlice/getAllMovies',
     async (page, {rejectWithValue}) => {
         try {

@@ -6,9 +6,9 @@ import {MovieCard} from "../MovieCard/MovieCard";
 
 const MovieList = () => {
     const {movieData} = useAppSelector(state => state.movies);
-
+    console.log(movieData);
     return (
-        <div style={{background: 'aliceblue'}}>
+        <div>
             {movieData?.results.map((movie: IShortMovie, id: number) => <MovieCard movie={movie} key={id}/>)}
         </div>
     );
