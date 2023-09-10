@@ -13,7 +13,6 @@ const MovieCard: FC<IProps> = ({movie}) => {
         const navigate = useNavigate();
         const transferToFullMovie = (id: number) => {
             navigate(`${id}`)
-
         }
 
         return (
