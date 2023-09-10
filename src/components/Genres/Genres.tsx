@@ -1,6 +1,9 @@
 import React, {useEffect} from 'react';
-import {genreActions} from "../../redux/slices/genreSlice";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {genreActions} from "../../redux/slices/genreSlice";
+import {Genre} from "./Genre/Genre";
+import styles from './genres.module.css'
 
 const Genres = () => {
     const dispatch = useAppDispatch();
@@ -11,9 +14,9 @@ const Genres = () => {
     }, [dispatch]);
 
     return (
-        <ul>
-            {genres.map(value => <li key={value.id}>{value.name}</li>)}
-        </ul>
+        <div className={styles.css}>
+            {genres.map(genre => <Genre key={genre.id} genre={genre}/>)}
+        </div>
     );
 };
 
