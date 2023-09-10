@@ -2,10 +2,8 @@ import {createBrowserRouter, Navigate} from "react-router-dom";
 
 import {RootLayout} from "../layouts";
 import {MoviesPage} from "../pages";
-import {MovieExtended, MovieList} from "../components/Movies";
+import {MovieExtended} from "../components/Movies";
 import {Genres} from "../components/Genres/Genres";
-import {movieActions} from "../redux/slices/movieSlice";
-import {store} from "../redux/store";
 
 
 const router = createBrowserRouter([
@@ -20,12 +18,6 @@ const router = createBrowserRouter([
             {
                 path: 'movies',
                 element: <MoviesPage/>,
-                children: [
-                    {
-                        index: true,
-                        element: <MovieList/>,
-                    },
-                ]
             },
             {
                 path: 'movies/:id',

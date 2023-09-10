@@ -1,45 +1,54 @@
-import React, {useEffect} from 'react';
-import {Outlet, useSearchParams} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {useSearchParams} from "react-router-dom";
 
-import {useAppDispatch} from "../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
+import {MovieList} from "../components/Movies";
 import {movieActions} from "../redux/slices/movieSlice";
 
 const MoviesPage = () => {
     const dispatch = useAppDispatch();
     const [params, setParams] = useSearchParams({page: '1'});
-    const currentPage = params.get('page')
+    const {movieData} = useAppSelector(state => state.movies);
+    // const currentPage = params.get('page')
 
     useEffect(() => {
-        dispatch(movieActions.getAllMovies(+currentPage))
-    }, [currentPage]);
-
+        dispatch(movieActions.getAllMovies(+params.get('page')))
+    }, [params.get('page')]);
 
     const handlePage = (action: '-' | '+'): void => {
-
         if (action === '+') {
-            const incrementedPage = (parseInt(currentPage) + 1).toString()
-            setParams({page: incrementedPage})
+            setParams(prev => {
+                prev.set('page', (parseInt(params.get('page')) + 1).toString())
+                return prev
+            })
 
         } else {
-            const decrementedPage = (parseInt(currentPage) - 1).toString()
-            setParams({page: decrementedPage})
+            // const decrementedPage = (parseInt(currentPage) - 1).toString()
+            // setParams({page: decrementedPage})
+            setParams(prev => {
+                prev.set('page', (parseInt(params.get('page')) - 1).toString())
+                return prev
+            })
         }
 
     }
+
+
+    console.log(movieData);
+
     return (
         <>
             <div>
                 <button
-                    disabled={+currentPage <= 1}
+                    disabled={+params.get('page') <= 1}
                     onClick={() => handlePage('-')}>prev
                 </button>
-
                 <button
-                    disabled={+currentPage >= 500}
+                    disabled={+params.get('page') >= 500}
                     onClick={() => handlePage('+')}>next
                 </button>
             </div>
-            <Outlet/>
+            <MovieList movieData={movieData}/>
         </>
     );
 };

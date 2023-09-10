@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-import {useAppSelector} from "../../../hooks/reduxHooks";
-import {IShortMovie} from "../../../interfaces";
+import {IMovieResponse} from "../../../interfaces";
 import {MovieCard} from "../MovieCard/MovieCard";
 
-const MovieList = () => {
-    const {movieData} = useAppSelector(state => state.movies);
-    console.log(movieData);
+interface IProps {
+    movieData: IMovieResponse
+}
+
+const MovieList: FC<IProps> = ({movieData}) => {
     return (
         <div>
-            {movieData?.results.map((movie: IShortMovie, id: number) => <MovieCard movie={movie} key={id}/>)}
+            {movieData?.results.map((movie) => <MovieCard movie={movie} key={movie.id}/>)}
         </div>
     );
 };
