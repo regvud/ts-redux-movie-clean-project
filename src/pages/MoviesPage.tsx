@@ -32,6 +32,7 @@ const MoviesPage = () => {
     //     }
     //
     // }
+    //
 
     const handlePage = (): void => {
 
