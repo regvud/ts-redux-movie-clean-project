@@ -15,7 +15,6 @@ const MovieExtended = () => {
         dispatch(movieActions.resetFullMovie())
     }, []);
 
-
     return (
         <>
             {

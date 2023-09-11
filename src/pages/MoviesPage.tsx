@@ -1,65 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useSearchParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
 import {MovieList} from "../components/Movies";
 import {movieActions} from "../redux/slices/movieSlice";
 
-const MoviesPage = () => {
-    const dispatch = useAppDispatch();
-    const [params, setParams] = useSearchParams({page: '1'});
-    const {movieData} = useAppSelector(state => state.movies);
-    const currentPage = params.get('page')
+const MoviesPage: FC = () => {
+        const dispatch = useAppDispatch();
+        const [params, setParams] = useSearchParams({page: '1'});
+        const {movieData} = useAppSelector(state => state.movies);
+        const currentPage = params.get('page')
 
-    useEffect(() => {
-        dispatch(movieActions.getAllMovies(+params.get('page')))
-    }, [currentPage]);
+        useEffect(() => {
+            dispatch(movieActions.getAllMovies(+currentPage))
+        }, [currentPage]);
 
-    // const handlePage = (action: '-' | '+'): void => {
-    //     if (action === '+') {
-    //         setParams(prev => {
-    //             prev.set('page', (parseInt(params.get('page')) + 1).toString())
-    //             return prev
-    //         })
-    //
-    //     } else {
-    //         // const decrementedPage = (parseInt(currentPage) - 1).toString()
-    //         // setParams({page: decrementedPage})
-    //         setParams(prev => {
-    //             prev.set('page', (parseInt(params.get('page')) - 1).toString())
-    //             return prev
-    //         })
-    //     }
-    //
-    // }
-    //
 
-    const handlePage = (): void => {
-
-        setParams(prev => {
-            prev.set('page', (parseInt(params.get('page')) + 1).toString())
-            return prev
-        })
-
+        return (
+            <>
+                <div>
+                    <button
+                        disabled={+params.get('page') <= 1}
+                        onClick={() => setParams({page: (+currentPage - 1).toString()})}>prev
+                    </button>
+                    <button
+                        disabled={+params.get('page') >= 500}
+                        onClick={() => setParams({page: (+currentPage + 1).toString()})}>next
+                    </button>
+                </div>
+                <MovieList movieData={movieData}/>
+            </>
+        );
     }
-
-    console.log(movieData);
-
-    return (
-        <>
-            <div>
-                <button
-                    disabled={+params.get('page') <= 1}
-                    onClick={handlePage}>prev
-                </button>
-                <button
-                    disabled={+params.get('page') >= 500}
-                    onClick={handlePage}>next
-                </button>
-            </div>
-            <MovieList movieData={movieData}/>
-        </>
-    );
-};
+;
 
 export {MoviesPage};
