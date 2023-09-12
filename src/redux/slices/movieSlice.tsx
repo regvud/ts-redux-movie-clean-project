@@ -1,26 +1,26 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IFullMovie, IMovieResponse} from "../../interfaces";
+import {IFullMovie, IShortMovie} from "../../interfaces";
 import {movieService} from "../../services";
 import {AxiosError} from "axios";
 
 interface IState {
-    movieData: IMovieResponse,
+    movieData: IShortMovie[],
     fullMovie: IFullMovie,
     status: string
 }
 
 const initialState: IState = {
-    movieData: null,
+    movieData: [],
     fullMovie: null,
     status: null
 }
 
-const getAllMovies = createAsyncThunk<IMovieResponse, number>(
+const getAllMovies = createAsyncThunk<IShortMovie[], number>(
     'movieSlice/getAllMovies',
     async (page, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.getAllMovies(page)
-            return data
+            const {data:{results}} = await movieService.getAllMovies(page)
+            return results
         } catch (e) {
             const err = e as AxiosError
             rejectWithValue(err.response.data)
@@ -53,6 +53,7 @@ const movieSlice = createSlice({
         extraReducers: builder => builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
                 state.movieData = action.payload
+                state.status = 'fulfilled'
             })
             .addCase(getAllMovies.pending, (state) => {
                 state.status = 'pending'
