@@ -1,9 +1,9 @@
 import {createBrowserRouter, Navigate, RouterProvider,} from "react-router-dom";
 
 import {RootLayout} from "../layouts";
-import {MoviesPage} from "../pages";
+import {GenrePage, MoviesPage} from "../pages";
 import {MovieExtended} from "../components/Movies";
-import {Genres, MoviesByGenre} from "../components/Genres";
+import {MoviesByGenre} from "../components/Genres";
 
 const Index = () => {
     const router = createBrowserRouter([
@@ -25,7 +25,7 @@ const Index = () => {
                 },
                 {
                     path: 'genres',
-                    element: <Genres/>
+                    element: <GenrePage/>
                 },
                 {
                     path: 'genres/:name',

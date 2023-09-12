@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import {useSearchParams} from "react-router-dom";
 
-import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
-import {MovieList} from "../components/Movies";
-import {movieActions} from "../redux/slices/movieSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {MovieList} from "../../components/Movies";
+import {movieActions} from "../../redux/slices/movieSlice";
 
 const MoviesPage: FC = () => {
     const dispatch = useAppDispatch();

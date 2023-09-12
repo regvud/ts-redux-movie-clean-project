@@ -1,12 +1,10 @@
 import React, {useEffect} from 'react';
-
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {genreActions} from "../../redux/slices/genreSlice";
-import {Genre} from "./Genre/Genre";
-import styles from './genres.module.css'
+import styles from "./genres.module.css";
+import {Genre} from "../../components/Genres";
 
-
-const Genres = () => {
+const GenrePage = () => {
     const dispatch = useAppDispatch();
     const {genres} = useAppSelector(state => state.genres);
 
@@ -22,4 +20,4 @@ const Genres = () => {
     );
 };
 
-export {Genres};
+export {GenrePage};
