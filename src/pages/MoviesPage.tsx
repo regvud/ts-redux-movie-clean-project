@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import {useSearchParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
@@ -9,13 +9,16 @@ const MoviesPage: FC = () => {
     const dispatch = useAppDispatch();
     const [params, setParams] = useSearchParams({page: '1'});
     const {movieData} = useAppSelector(state => state.movies);
-    const currentPage = params.get('page')
+
+    const currentPage = useMemo(() => {
+        return params.get('page')
+    }, [setParams])
 
     useEffect(() => {
         dispatch(movieActions.getAllMovies(+currentPage))
     }, [currentPage]);
 
-
+    console.log(currentPage);
     return (
         <>
             <div>
