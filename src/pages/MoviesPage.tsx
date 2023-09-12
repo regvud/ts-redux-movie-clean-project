@@ -1,11 +1,9 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useSearchParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
 import {MovieList} from "../components/Movies";
 import {movieActions} from "../redux/slices/movieSlice";
-import {movieService} from "../services";
-import {IMovieResponse} from "../interfaces";
 
 const MoviesPage: FC = () => {
     const dispatch = useAppDispatch();
@@ -17,7 +15,6 @@ const MoviesPage: FC = () => {
         dispatch(movieActions.getAllMovies(+currentPage))
     }, [currentPage]);
 
-    console.log(currentPage)
 
     return (
         <>
