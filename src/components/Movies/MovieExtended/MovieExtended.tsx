@@ -6,14 +6,14 @@ import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {posterURL} from "../../../constants";
 
 const MovieExtended = () => {
-    const {fullMovie} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
+    const {fullMovie} = useAppSelector(state => state.movies);
     const {id} = useParams();
 
     useEffect(() => {
         dispatch(movieActions.getFullMovie(+id))
         dispatch(movieActions.resetFullMovie())
-    }, []);
+    }, [id]);
 
     return (
         <>
