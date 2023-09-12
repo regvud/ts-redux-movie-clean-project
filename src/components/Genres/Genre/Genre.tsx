@@ -18,7 +18,6 @@ const Genre: FC<IProps> = ({genre}) => {
 
     return (
         <div className={styles.css} onClick={onGenreClick}>
-            {id}
             {name}
         </div>
     );

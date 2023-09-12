@@ -5,10 +5,12 @@ import {genreService} from "../../services";
 
 interface IState {
     genres: IGenre[]
+    genreID: number
 }
 
 const initialState: IState = {
-    genres: []
+    genres: [],
+    genreID: null
 };
 
 const getGenres = createAsyncThunk(
