@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 import {movieActions} from "../../../redux/slices/movieSlice";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
@@ -9,12 +9,16 @@ const MovieExtended = () => {
     const dispatch = useAppDispatch();
     const {fullMovie} = useAppSelector(state => state.movies);
     const {id} = useParams();
+    const {state} = useLocation();
 
     useEffect(() => {
         dispatch(movieActions.getFullMovie(+id))
-        dispatch(movieActions.resetFullMovie())
-    }, [id]);
 
+        return () => {
+            dispatch(movieActions.resetFullMovie())
+        }
+    }, [id]);
+    console.log(state)
     return (
         <>
             {
