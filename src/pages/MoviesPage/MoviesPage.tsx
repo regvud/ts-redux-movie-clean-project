@@ -19,7 +19,7 @@ const MoviesPage = () => {
 
     return (
         <>
-            <Pagination total_pages={500}/>
+            <Pagination page={currentPage} total_pages={500}/>
             {status === 'pending' ?
                 <h1>loading</h1> :
                 <MovieList/>

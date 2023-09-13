@@ -3,11 +3,12 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 
 
 interface Props {
+    page: string
     total_pages?: number,
 }
 
-const Pagination: FC<Props> = ({total_pages}) => {
-    const [params, setParams] = useSearchParams({page: '1'});
+const Pagination: FC<Props> = ({page, total_pages}) => {
+    const [params, setParams] = useSearchParams({page});
     const navigate = useNavigate();
     const searchRef = useRef('')
     const [inputError, setInputError] = useState(null)
@@ -26,7 +27,6 @@ const Pagination: FC<Props> = ({total_pages}) => {
 
         setInputError('You have to type a search request!')
     }
-
     return (
         <div>
             <button

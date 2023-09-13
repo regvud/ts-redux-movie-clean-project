@@ -26,10 +26,10 @@ const MoviesByGenre = () => {
         }
     }, [state, currentPage]);
 
-    console.log(moviesByGenre?.total_pages);
+
     return (
         <div>
-            <Pagination total_pages={moviesByGenre?.total_pages}/>
+            <Pagination page={currentPage} total_pages={moviesByGenre?.total_pages}/>
             {moviesByGenre?.results.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
         </div>
     );

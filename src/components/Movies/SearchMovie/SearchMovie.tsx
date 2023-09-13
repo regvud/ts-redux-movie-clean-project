@@ -19,11 +19,15 @@ const SearchMovie = () => {
 
     useEffect(() => {
         dispatch(movieActions.getMoviesBySearch({page: +currentPage, query: state ? state : query}))
-    }, [state, currentPage]);
 
+        return () => {
+            dispatch(movieActions.resetMoviesBySearch())
+        }
+    }, [state, currentPage]);
+    console.log(currentPage);
     return (
         <div>
-            <Pagination total_pages={moviesBySearch?.total_pages}/>
+            <Pagination page={currentPage} total_pages={moviesBySearch?.total_pages}/>
             {moviesBySearch?.results.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
         </div>
     );

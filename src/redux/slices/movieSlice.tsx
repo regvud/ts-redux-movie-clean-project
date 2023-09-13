@@ -9,6 +9,7 @@ interface IState {
     moviesByGenre: IMovieResponse,
     moviesBySearch: IMovieResponse,
     status: string
+    theme: boolean
 }
 
 const initialState: IState = {
@@ -16,7 +17,8 @@ const initialState: IState = {
     fullMovie: null,
     moviesByGenre: null,
     moviesBySearch: null,
-    status: null
+    status: null,
+    theme: false
 }
 
 const getAllMovies = createAsyncThunk<IShortMovie[], number>(
