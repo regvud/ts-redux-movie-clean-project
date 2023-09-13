@@ -8,11 +8,10 @@ interface Props {
 }
 
 const Pagination: FC<Props> = ({page, total_pages}) => {
-    const [params, setParams] = useSearchParams({page});
+    const [, setParams] = useSearchParams({page});
     const navigate = useNavigate();
     const searchRef = useRef('')
     const [inputError, setInputError] = useState(null)
-    const currentPage = params.get('page')
 
     const onSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         searchRef.current = e.target.value
@@ -30,8 +29,8 @@ const Pagination: FC<Props> = ({page, total_pages}) => {
     return (
         <div>
             <button
-                disabled={+params.get('page') <= 1}
-                onClick={() => setParams({page: (+currentPage - 1).toString()})}>prev
+                disabled={+page <= 1}
+                onClick={() => setParams({page: (+page - 1).toString()})}>prev
             </button>
             <label>
                 <input placeholder={'search...'} type="text" onChange={onSearchInputChange}/>
@@ -39,8 +38,8 @@ const Pagination: FC<Props> = ({page, total_pages}) => {
                 <button onClick={onSearchButton}>search</button>
             </label>
             <button
-                disabled={+params.get('page') >= total_pages}
-                onClick={() => setParams({page: (+currentPage + 1).toString()})}>next
+                disabled={+page >= total_pages}
+                onClick={() => setParams({page: (+page + 1).toString()})}>next
             </button>
         </div>
     );
