@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IFullMovie, IShortMovie} from "../../interfaces";
+import {IFullMovie, IMovieResponse, IShortMovie} from "../../interfaces";
 import {movieService} from "../../services";
 import {AxiosError} from "axios";
 
@@ -30,7 +30,10 @@ const getAllMovies = createAsyncThunk<IShortMovie[], number>(
     }
 )
 
-const getMoviesByGenre = createAsyncThunk<IShortMovie[], { page: number, with_genres: number }>(
+const getMoviesByGenre = createAsyncThunk<IShortMovie[], {
+    page: number,
+    with_genres: number
+}>(
     'movieSlice/getMoviesByGenre',
     async ({page, with_genres}, {rejectWithValue}) => {
         try {
