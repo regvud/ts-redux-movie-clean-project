@@ -6,13 +6,13 @@ import {Genre} from "../../components/Genres";
 
 const GenrePage = () => {
     const dispatch = useAppDispatch();
-    const {genres} = useAppSelector(state => state.genres);
+    const genres = useAppSelector(state => state.genres.genres);
 
     useEffect(() => {
         dispatch(genreActions.getGenres())
-    }, [dispatch]);
+    }, []);
 
-
+    console.log('genre render');
     return (
         <div className={styles.css}>
             {genres.map(genre => <Genre key={genre.id} genre={genre}/>)}

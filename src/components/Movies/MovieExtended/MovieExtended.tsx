@@ -7,7 +7,7 @@ import {posterURL} from "../../../constants";
 
 const MovieExtended = () => {
     const dispatch = useAppDispatch();
-    const {fullMovie} = useAppSelector(state => state.movies);
+    const fullMovie = useAppSelector(state => state.movies.fullMovie);
     const {id} = useParams();
 
     useEffect(() => {

@@ -1,6 +1,7 @@
 import React, {FC, useRef, useState} from 'react';
 import {useNavigate, useSearchParams} from "react-router-dom";
 
+import css from './pagination.module.css'
 
 interface Props {
     page: string
@@ -13,28 +14,29 @@ const Pagination: FC<Props> = ({page, total_pages}) => {
     const searchRef = useRef('')
     const [inputError, setInputError] = useState(null)
 
+
     const onSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         searchRef.current = e.target.value
         setInputError(null)
     }
 
     const onSearchButton = () => {
-
         if (searchRef.current !== '') {
-            navigate('/search/movie', {replace: true, state: searchRef.current})
+            navigate('/search/movie', {state: searchRef.current})
+        } else {
+            setInputError('Enter search request')
         }
-
-        setInputError('You have to type a search request!')
     }
+
     return (
-        <div>
+        <div className={css.pagination}>
             <button
                 disabled={+page <= 1}
                 onClick={() => setParams({page: (+page - 1).toString()})}>prev
             </button>
             <label>
-                <input placeholder={'search...'} type="text" onChange={onSearchInputChange}/>
-                {inputError && <span>{inputError}</span>}
+                <input placeholder={'search request'} type="text" onChange={onSearchInputChange}/>
+                {inputError && <b><span> {`<- ${inputError}`} </span></b>}
                 <button onClick={onSearchButton}>search</button>
             </label>
             <button

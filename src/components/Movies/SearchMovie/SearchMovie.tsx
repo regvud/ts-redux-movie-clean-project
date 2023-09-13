@@ -7,7 +7,7 @@ import {Pagination} from "../../Pagination";
 
 const SearchMovie = () => {
     const dispatch = useAppDispatch();
-    const {moviesBySearch} = useAppSelector(state => state.movies);
+    const moviesBySearch = useAppSelector(state => state.movies.moviesBySearch);
     const {state} = useLocation();
     const [params] = useSearchParams({page: '1', query: state});
     const currentPage = params.get('page')
@@ -24,7 +24,7 @@ const SearchMovie = () => {
             dispatch(movieActions.resetMoviesBySearch())
         }
     }, [state, currentPage]);
-    console.log(currentPage);
+
     return (
         <div>
             <Pagination page={currentPage} total_pages={moviesBySearch?.total_pages}/>
