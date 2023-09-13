@@ -6,15 +6,15 @@ import {AxiosError} from "axios";
 interface IState {
     movieData: IShortMovie[],
     fullMovie: IFullMovie,
-    moviesByGenre: IShortMovie[]
-    moviesBySearch: IMovieResponse
+    moviesByGenre: IMovieResponse,
+    moviesBySearch: IMovieResponse,
     status: string
 }
 
 const initialState: IState = {
     movieData: [],
     fullMovie: null,
-    moviesByGenre: [],
+    moviesByGenre: null,
     moviesBySearch: null,
     status: null
 }
@@ -32,11 +32,11 @@ const getAllMovies = createAsyncThunk<IShortMovie[], number>(
     }
 )
 
-const getMoviesBySearch = createAsyncThunk<IMovieResponse, string>(
+const getMoviesBySearch = createAsyncThunk<IMovieResponse, { page: number, query: string }>(
     'movieSlice/getMoviesBySearch',
-    async (query, {rejectWithValue}) => {
+    async ({page, query}, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.searchByTitle(query)
+            const {data} = await movieService.searchByTitle(page, query)
             return data
         } catch (e) {
             const err = e as AxiosError
@@ -45,15 +45,15 @@ const getMoviesBySearch = createAsyncThunk<IMovieResponse, string>(
     }
 )
 
-const getMoviesByGenre = createAsyncThunk<IShortMovie[], {
+const getMoviesByGenre = createAsyncThunk<IMovieResponse, {
     page: number,
     with_genres: number
 }>(
     'movieSlice/getMoviesByGenre',
     async ({page, with_genres}, {rejectWithValue}) => {
         try {
-            const {data: {results}} = await movieService.byGenre(page, with_genres);
-            return results
+            const {data} = await movieService.byGenre(page, with_genres);
+            return data
         } catch (e) {
             const err = e as AxiosError
             rejectWithValue(err.response.data)

@@ -38,6 +38,10 @@ const Index = () => {
                 {
                     path: 'search/movie',
                     element: <SearchMovie/>
+                },
+                {
+                    path: 'search/movie/:id',
+                    element: <MovieExtended/>
                 }
 
             ]

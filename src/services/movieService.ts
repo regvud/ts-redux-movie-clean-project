@@ -1,6 +1,6 @@
 import {apiService} from "./apiService";
 import {urls} from "../constants";
-import {IFullMovie, IMovieResponse, IShortMovie} from "../interfaces";
+import {IFullMovie, IMovieResponse} from "../interfaces";
 
 
 const movieService = {
@@ -11,8 +11,8 @@ const movieService = {
     byGenre: (page: number, with_genres: number) => apiService.get<IMovieResponse>(urls.movies.base, {
         params: {page, with_genres}
     }),
-    searchByTitle: (query: string) => apiService.get<IMovieResponse>(urls.movies.search, {
-        params: {query}
+    searchByTitle: (page: number, query: string) => apiService.get<IMovieResponse>(urls.movies.search, {
+        params: {page, query}
     })
 }
 
