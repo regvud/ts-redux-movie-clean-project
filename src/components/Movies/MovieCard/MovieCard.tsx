@@ -18,12 +18,16 @@ const MovieCard: FC<IProps> = ({movie}) => {
     }
 
     return (
-        <div>
-            <h2>{title}</h2>
-            <h2>{release_date}</h2>
-            <img src={`${posterURL}${poster_path}`} alt={title} onClick={() => transferToFullMovie(id)}/>
-            <StarsRatingBadge vote_average={vote_average}/>
-        </div>
+        <>
+            {poster_path &&
+                <div>
+                    <h2>{title}</h2>
+                    <h2>{release_date}</h2>
+                    <img src={`${posterURL}${poster_path}`} alt={title} onClick={() => transferToFullMovie(id)}/>
+                    <StarsRatingBadge vote_average={vote_average}/>
+                </div>
+            }
+        </>
     );
 }
 export {MovieCard};

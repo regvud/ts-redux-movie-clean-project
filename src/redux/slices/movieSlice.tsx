@@ -7,6 +7,7 @@ interface IState {
     movieData: IShortMovie[],
     fullMovie: IFullMovie,
     moviesByGenre: IShortMovie[]
+    moviesBySearch: IMovieResponse
     status: string
 }
 
@@ -14,6 +15,7 @@ const initialState: IState = {
     movieData: [],
     fullMovie: null,
     moviesByGenre: [],
+    moviesBySearch: null,
     status: null
 }
 
@@ -23,6 +25,19 @@ const getAllMovies = createAsyncThunk<IShortMovie[], number>(
         try {
             const {data: {results}} = await movieService.getAllMovies(page)
             return results
+        } catch (e) {
+            const err = e as AxiosError
+            rejectWithValue(err.response.data)
+        }
+    }
+)
+
+const getMoviesBySearch = createAsyncThunk<IMovieResponse, string>(
+    'movieSlice/getMoviesBySearch',
+    async (query, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.searchByTitle(query)
+            return data
         } catch (e) {
             const err = e as AxiosError
             rejectWithValue(err.response.data)
@@ -69,6 +84,9 @@ const movieSlice = createSlice({
             },
             resetMoviesByGenre: (state) => {
                 state.moviesByGenre = null
+            },
+            resetMoviesBySearch: (state) => {
+                state.moviesBySearch = null
             }
         },
         extraReducers: builder => builder
@@ -85,6 +103,9 @@ const movieSlice = createSlice({
             .addCase(getMoviesByGenre.fulfilled, (state, action) => {
                 state.moviesByGenre = action.payload
             })
+            .addCase(getMoviesBySearch.fulfilled, (state, action) => {
+                state.moviesBySearch = action.payload
+            })
     }
 )
 
@@ -94,7 +115,8 @@ const movieActions = {
     ...actions,
     getAllMovies,
     getFullMovie,
-    getMoviesByGenre
+    getMoviesByGenre,
+    getMoviesBySearch
 }
 
 export {

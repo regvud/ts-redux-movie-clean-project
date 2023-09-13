@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useSearchParams} from "react-router-dom";
+import React, {useEffect, useRef} from 'react';
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {MovieList} from "../../components/Movies";
@@ -7,13 +7,14 @@ import {movieActions} from "../../redux/slices/movieSlice";
 import css from './moviepage.module.css'
 
 const MoviesPage = () => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [params, setParams] = useSearchParams({page: '1'});
     const {status} = useAppSelector(state => state.movies);
     const currentPage = params.get('page')
 
     const searchRef = useRef('')
-    const [searchInput, setSearchInput] = useState(null)
+    // const [searchInput, setSearchInput] = useState(null)
 
     useEffect(() => {
         dispatch(movieActions.getAllMovies(+currentPage))
@@ -23,8 +24,9 @@ const MoviesPage = () => {
         searchRef.current = e.target.value
     }
 
+
     const onSearchButton = () => {
-        setSearchInput(searchRef.current)
+        navigate('/search/movie', {replace: true, state: searchRef.current})
     }
 
 

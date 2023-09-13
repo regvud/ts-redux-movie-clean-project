@@ -2,7 +2,7 @@ import {createBrowserRouter, Navigate, RouterProvider,} from "react-router-dom";
 
 import {RootLayout} from "../layouts";
 import {GenrePage, MoviesPage} from "../pages";
-import {MovieExtended} from "../components/Movies";
+import {MovieExtended, SearchMovie} from "../components/Movies";
 import {MoviesByGenre} from "../components/Genres";
 
 const Index = () => {
@@ -34,6 +34,10 @@ const Index = () => {
                 {
                     path: 'genres/:name/:id',
                     element: <MovieExtended/>
+                },
+                {
+                    path: 'search/movie',
+                    element: <SearchMovie/>
                 }
 
             ]
