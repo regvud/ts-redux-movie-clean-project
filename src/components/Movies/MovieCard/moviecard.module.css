@@ -1,0 +1,18 @@
+.card {
+    width: 400px;
+    border: 2px solid darkcyan;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px darkcyan;;
+
+    margin: 20px 0 40px 0;
+    text-align: center;
+}
+
+img {
+    width: inherit;
+    height: inherit;
+}
+
+h1 {
+    overflow: hidden;
+}

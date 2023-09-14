@@ -1,4 +1,9 @@
-.buttons {
-    display: flex;
-    justify-content: space-around;
+.light {
+    padding-top: 20px;
+
+}
+
+.dark {
+    padding-top: 20px;
+    background-color: #5f6975;
 }

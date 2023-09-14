@@ -18,7 +18,7 @@ const initialState: IState = {
     moviesByGenre: null,
     moviesBySearch: null,
     status: null,
-    theme: false
+    theme: null
 }
 
 const getAllMovies = createAsyncThunk<IShortMovie[], number>(
@@ -89,6 +89,9 @@ const movieSlice = createSlice({
             },
             resetMoviesBySearch: (state) => {
                 state.moviesBySearch = null
+            },
+            themeSwitch: (state) => {
+                state.theme = !state.theme
             }
         },
         extraReducers: builder => builder

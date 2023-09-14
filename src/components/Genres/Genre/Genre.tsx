@@ -5,10 +5,11 @@ import {IGenre} from "../../../interfaces";
 import {useNavigate} from "react-router-dom";
 
 interface IProps {
-    genre: IGenre
+    genre: IGenre,
+    navigation?: boolean
 }
 
-const Genre: FC<IProps> = ({genre}) => {
+const Genre: FC<IProps> = ({genre, navigation}) => {
     const navigate = useNavigate();
     const {id, name} = genre;
 
@@ -17,7 +18,7 @@ const Genre: FC<IProps> = ({genre}) => {
     }
 
     return (
-        <div className={styles.css} onClick={onGenreClick}>
+        <div className={styles.css} onClick={navigation ? onGenreClick : null}>
             {name}
         </div>
     );

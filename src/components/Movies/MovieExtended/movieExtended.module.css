@@ -1,0 +1,19 @@
+.light {
+    height: 100%;
+    padding: 20px;
+
+}
+
+.dark {
+    background-color: #5f6975;
+
+    height: 100%;
+    padding: 20px;
+}
+
+.genres {
+    display: flex;
+    justify-content: center;
+
+    height: 100px;
+}

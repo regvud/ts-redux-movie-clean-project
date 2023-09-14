@@ -1,7 +1,15 @@
-.css {
+.light {
     display: grid;
     grid-template-columns: 2fr 2fr 2fr;
     width: 100%;
-
+    height: 100dvh;
 }
 
+.dark {
+    background-color: #5f6975;
+
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    width: 100%;
+    height: 100dvh;
+}

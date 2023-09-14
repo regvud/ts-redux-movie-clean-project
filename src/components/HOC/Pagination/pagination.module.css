@@ -1,0 +1,39 @@
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 200px 10px 200px;
+}
+
+.button {
+    width: 100px;
+    height: 50px;
+    font-size: 25px;
+
+    border-radius: 20px;
+    border: 1px solid orange;
+    background-color: azure;
+}
+
+.button:active {
+    background-color: orange;
+}
+
+.button:hover{
+    cursor: pointer;
+}
+
+.searchButton {
+    width: 75px;
+    height: 28px;
+    font-size: 15px;
+
+    margin-left: 20px;
+
+}
+
+.searchInput {
+    width: 250px;
+    height: 20px;
+}

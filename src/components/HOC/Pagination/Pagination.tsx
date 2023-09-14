@@ -30,18 +30,20 @@ const Pagination: FC<Props> = ({page, total_pages}) => {
 
     return (
         <div className={css.pagination}>
-            <button
-                disabled={+page <= 1}
-                onClick={() => setParams({page: (+page - 1).toString()})}>prev
+            <button className={css.button}
+                    disabled={+page <= 1}
+                    onClick={() => setParams({page: (+page - 1).toString()})}>{'<<<'}
             </button>
             <label>
-                <input placeholder={'search request'} type="text" onChange={onSearchInputChange}/>
+                <input className={css.searchInput} placeholder={'search request'} type="text"
+                       onChange={onSearchInputChange}
+                       onKeyDown={(e) => e.key === 'Enter' && onSearchButton()}/>
                 {inputError && <b><span> {`<- ${inputError}`} </span></b>}
-                <button onClick={onSearchButton}>search</button>
+                <button className={css.searchButton} onClick={onSearchButton}>search</button>
             </label>
-            <button
-                disabled={+page >= total_pages}
-                onClick={() => setParams({page: (+page + 1).toString()})}>next
+            <button className={css.button}
+                    disabled={+page >= total_pages}
+                    onClick={() => setParams({page: (+page + 1).toString()})}>{'>>>'}
             </button>
         </div>
     );
