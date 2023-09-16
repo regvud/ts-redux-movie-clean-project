@@ -1,19 +1,17 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IGenre} from "../../interfaces";
+import {IGenre, IGenreResponse} from "../../interfaces";
 import {AxiosError} from "axios";
 import {genreService} from "../../services";
 
 interface IState {
     genres: IGenre[]
-    genreID: number
 }
 
 const initialState: IState = {
     genres: [],
-    genreID: null
 };
 
-const getGenres = createAsyncThunk(
+const getGenres = createAsyncThunk<IGenreResponse, void>(
     'genreSlice/getGenres',
     async (_, {rejectWithValue}) => {
         try {
