@@ -13,6 +13,7 @@ const Header = () => {
         dispatch(movieActions.themeSwitch())
     };
 
+    console.log(theme)
     return (
         <div className={theme ? css.dark : css.light}>
             <button className={css.button} onClick={changeTheme}>{theme ? 'Light Mode' : 'Dark Mode'}</button>

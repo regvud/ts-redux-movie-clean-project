@@ -18,7 +18,7 @@ const initialState: IState = {
     moviesByGenre: null,
     moviesBySearch: null,
     status: null,
-    theme: null
+    theme: false
 }
 
 const getAllMovies = createAsyncThunk<IShortMovie[], number>(
