@@ -1,10 +1,13 @@
 import {MovieCard} from "../MovieCard/MovieCard";
-import {useAppSelector} from "../../../hooks/reduxHooks";
 import css from './movielist.module.css'
+import {IShortMovie} from "../../../interfaces";
+import {FC} from "react";
 
-const MovieList = () => {
-    const movieData = useAppSelector(state => state.movies.movieData);
+interface Props {
+    movieData: IShortMovie[]
+}
 
+const MovieList: FC<Props> = ({movieData}) => {
     return (
         <div className={css.list}>
             {movieData.map((movie) => <MovieCard movie={movie} key={movie.id}/>)}

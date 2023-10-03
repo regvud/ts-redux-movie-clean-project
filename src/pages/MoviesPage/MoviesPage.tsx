@@ -10,6 +10,7 @@ import css from './moviepage.module.css'
 const MoviesPage = () => {
     const dispatch = useAppDispatch();
     const theme = useAppSelector(state => state.movies.theme);
+    const movieData = useAppSelector(state => state.movies.movieData);
     const [params] = useSearchParams({page: '1'});
     const currentPage = params.get('page')
 
@@ -17,12 +18,11 @@ const MoviesPage = () => {
         dispatch(movieActions.getAllMovies(+currentPage))
     }, [currentPage]);
 
-
     return (
         <>
             <div className={theme ? css.dark : css.light}>
                 <Pagination page={currentPage} total_pages={500}/>
-                <MovieList/>
+                <MovieList movieData={movieData}/>
             </div>
         </>
     )
