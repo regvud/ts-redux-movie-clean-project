@@ -16,7 +16,7 @@ const MoviesPage = () => {
 
     useEffect(() => {
         dispatch(movieActions.getAllMovies(+currentPage))
-    }, [currentPage]);
+    }, [dispatch, currentPage]);
 
     return (
         <>

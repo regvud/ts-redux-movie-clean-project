@@ -23,7 +23,7 @@ const SearchMovie = () => {
 
     useEffect(() => {
         dispatch(movieActions.getMoviesBySearch({page: +currentPage, query: state ? state : query}))
-    }, [state, currentPage]);
+    }, [query, dispatch, state, currentPage]);
 
     return (
         <div className={theme ? cssTheme.dark : cssTheme.light}>

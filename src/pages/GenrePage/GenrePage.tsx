@@ -12,7 +12,7 @@ const GenrePage = () => {
 
     useEffect(() => {
         dispatch(genreActions.getGenres())
-    }, []);
+    }, [dispatch]);
 
     console.log('genre render');
     return (

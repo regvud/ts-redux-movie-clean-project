@@ -15,7 +15,7 @@ const MovieExtended = () => {
 
     useEffect(() => {
         dispatch(movieActions.getFullMovie(+id))
-    }, [id]);
+    }, [dispatch, id]);
 
     return (
         <div className={theme ? css.dark : css.light}>
