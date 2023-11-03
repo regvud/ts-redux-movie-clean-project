@@ -1,30 +1,30 @@
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
-import {movieActions} from "../../../redux/slices/movieSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { movieActions } from "../../../redux/slices/movieSlice";
 import icon from '../../../assets/istockphoto-879131204-612x612.jpg'
 import css from './header.module.css'
+import { useState } from "react";
 
 const Header = () => {
     const theme = useAppSelector(state => state.movies.theme);
     const dispatch = useAppDispatch();
 
     const changeTheme = () => {
-        dispatch(movieActions.themeSwitch())
+        dispatch(movieActions.themeSwitch(!theme))
     };
 
-    console.log(theme)
     return (
         <div className={theme ? css.dark : css.light}>
-            <button className={css.button} onClick={changeTheme}>{theme ? 'Light Mode' : 'Dark Mode'}</button>
+            <button className={css.button} onClick={changeTheme}>{theme ? 'Dark Mode' : 'Light Mode'}</button>
             <NavLink to={'movies'}>Movies</NavLink>
             <NavLink to={'genres'}>Genres</NavLink>
             <div className={css.icon}>
-                <img src={icon} alt="user-icon"/>
+                <img src={icon} alt="user-icon" />
                 <span>username</span>
             </div>
         </div>
     );
 };
 
-export {Header};
+export { Header };
